@@ -1,0 +1,54 @@
+.login-btn {
+    -fx-background-color: #ffffff;
+    -fx-background-radius:8px;
+    -fx-text-fill: black;
+    /*-fx-font-size: 19px;*/
+    -fx-cursor: hand;
+}
+.login-btn:hover {
+    -fx-background-color: #88c09b;
+    -fx-effect: dropshadow(gaussian, rgba(0.3, 0.3, 0.3, 0.3), 0.5, 0.5, 0.0, 0.0);
+}
+
+.clear-btn {
+    -fx-background-color: #5d866a;
+    -fx-background-radius:8px;
+    -fx-text-fill: white;
+    /*-fx-font-size: 19px;*/
+    -fx-cursor: hand;
+}
+
+.clear-btn:hover {
+    -fx-background-color: #88c09b;
+    -fx-effect: dropshadow(gaussian, rgba(0.3, 0.3, 0.3, 0.3), 0.5, 0.5, 0.0, 0.0);
+    -fx-text-fill: white;
+}
+
+.user-menu-button {
+    -fx-background-radius: 10px;
+}
+.antet {
+    -fx-background-color: #5d866a;
+    -fx-border-color: #ffffff;
+    -fx-border-width: .9px .9px .9px .9px;
+}
+.close {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+.close:hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+}
+
+.updatetraversallabel{
+    -fx-text-fill: #5d866a;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-alignment: left;
+}
+
+.viewnodeslabel{
+    -fx-text-fill: black;
+    -fx-alignment: left;
+}
