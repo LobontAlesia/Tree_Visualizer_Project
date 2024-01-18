@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BinarySearchTreeController {
     private BSTree tree = new BSTree();
@@ -556,62 +557,119 @@ public class BinarySearchTreeController {
 
 
 
-    public void preorder(Node w) {
-        if(w != Node.Nil) {
-            updateTraversalMessage(updatetraversalLabel.getText() + w.getKey() + " ");
-            preorder(w.getLeftChild());
-            preorder(w.getRightChild());
+    // Modify the preorderList to be a List<String>
+    public void preorder(Node w, List<String> preorderList) {
+        if (w != null) {
+            // Check if the key is not zero before adding to the list
+            if (w.getKey() != 0) {
+                preorderList.add(w.getData()); // Use w.getData() instead of w.getKey()
+                updateTraversalMessage(updatetraversalLabel.getText() + w.getKey() + " ");
+            }
+            preorder(w.getLeftChild(), preorderList);
+            preorder(w.getRightChild(), preorderList);
         }
     }
 
-    //method to display preorder traversal when button is pressed
+    // Method to display preorder traversal when the button is pressed
     public void preorderButtonPressed() {
         updateTraversalMessage("Preorder:  ");
-        preorder(tree.getRoot());
-//        //array cu elementele in preordine
-//        int[] preorderArray = new int[tree.getSize(this.root)];
-//        preorderArray = tree.preorderArray(tree.getRoot(), preorderArray);
-//        //da search pe rand la elementele din preorderarray. foloseste butonul nexttraversalbutton pentru a trece la elementul urmator din preorderarray
-//        nextTraversalButton.setOnAction(e -> {
-//            for(int i = 0; i < preorderArray.length; i++) {
-//                if(search(tree.getRoot(), preorderArray[i]) != Node.Nil) {
-//                    updateStatusMessage("Nodul " + preorderArray[i] + " a fost gasit in arbore.");
-//                }
-//                else
-//                    updateStatusMessage("Nodul " + preorderArray[i] + " nu a fost gasit in arbore.");
-//            }
-//        });
+
+        // Create an ArrayList to store the preorder traversal elements as Strings
+        List<String> preorderList = new ArrayList<>();
+        preorder(tree.getRoot(), preorderList);
+
+        // Counter to keep track of the current index in the preorderList
+        AtomicInteger currentIndex = new AtomicInteger(0);
+
+        // Event handler for the nextTraversalButton
+        nextTraversalButton.setOnAction(e -> {
+            if (currentIndex.get() < preorderList.size()) {
+                String currentElement = preorderList.get(currentIndex.get()); // Use String here
+                createStep(search(tree.getRoot(), Integer.parseInt(currentElement)));
+                currentIndex.incrementAndGet();
+            } else {
+                // Reset the counter or perform any other necessary action when traversal is complete
+                currentIndex.set(0);
+            }
+        });
     }
 
 
-    public void inorder(Node w) {
-        if(w != Node.Nil) {
-            inorder(w.getLeftChild());
-            updateTraversalMessage(updatetraversalLabel.getText() + w.getKey() + " ");
-            inorder(w.getRightChild());
+
+    // Modify the inorderList to be a List<String>
+    public void inorder(Node w, List<String> inorderList) {
+        if (w != null) {
+            // Check if the key is not zero before adding to the list
+            if (w.getKey() != 0) {
+                inorder(w.getLeftChild(), inorderList);
+                inorderList.add(w.getData()); // Use w.getData() instead of w.getKey()
+                updateTraversalMessage(updatetraversalLabel.getText() + w.getKey() + " ");
+                inorder(w.getRightChild(), inorderList);
+            }
         }
     }
 
-    //method to display inorder traversal when button is pressed
+    // Method to display inorder traversal when the button is pressed
     public void inorderButtonPressed() {
         updateTraversalMessage("Inorder:  ");
-        inorder(tree.getRoot());
+
+        // Create an ArrayList to store the inorder traversal elements as Strings
+        List<String> inorderList = new ArrayList<>();
+        inorder(tree.getRoot(), inorderList);
+
+        // Counter to keep track of the current index in the inorderList
+        AtomicInteger currentIndex = new AtomicInteger(0);
+
+        // Event handler for the nextTraversalButton
+        nextTraversalButton.setOnAction(e -> {
+            if (currentIndex.get() < inorderList.size()) {
+                String currentElement = inorderList.get(currentIndex.get());
+                createStep(search(tree.getRoot(), Integer.parseInt(currentElement)));
+                currentIndex.incrementAndGet();
+            } else {
+                // Reset the counter or perform any other necessary action when traversal is complete
+                currentIndex.set(0);
+            }
+        });
     }
 
-    public void postorder(Node w) {
-        if(w != Node.Nil) {
-            postorder(w.getLeftChild());
-            postorder(w.getRightChild());
-            updateTraversalMessage(updatetraversalLabel.getText() + w.getKey() + " ");
-
+    // Modify the postorderList to be a List<String>
+    public void postorder(Node w, List<String> postorderList) {
+        if (w != null) {
+            // Check if the key is not zero before adding to the list
+            if (w.getKey() != 0) {
+                postorder(w.getLeftChild(), postorderList);
+                postorder(w.getRightChild(), postorderList);
+                postorderList.add(w.getData()); // Use w.getData() instead of w.getKey()
+                updateTraversalMessage(updatetraversalLabel.getText() + w.getKey() + " ");
+            }
         }
     }
 
-    //method to display postorder traversal when button is pressed
+    // Method to display postorder traversal when the button is pressed
     public void postorderButtonPressed() {
         updateTraversalMessage("Postorder:  ");
-        postorder(tree.getRoot());
+
+        // Create an ArrayList to store the postorder traversal elements as Strings
+        List<String> postorderList = new ArrayList<>();
+        postorder(tree.getRoot(), postorderList);
+
+        // Counter to keep track of the current index in the postorderList
+        AtomicInteger currentIndex = new AtomicInteger(0);
+
+        // Event handler for the nextTraversalButton
+        nextTraversalButton.setOnAction(e -> {
+            if (currentIndex.get() < postorderList.size()) {
+                String currentElement = postorderList.get(currentIndex.get());
+                createStep(search(tree.getRoot(), Integer.parseInt(currentElement)));
+                currentIndex.incrementAndGet();
+            } else {
+                // Reset the counter or perform any other necessary action when traversal is complete
+                currentIndex.set(0);
+            }
+        });
     }
+
 
     @FXML
     private Button traversalclearButton;

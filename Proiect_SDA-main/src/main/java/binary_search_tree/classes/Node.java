@@ -69,4 +69,8 @@ public class Node {
         return menuItem;
     }
 
+    public String getData() {
+        return String.valueOf(this.key);
+    }
+
 }

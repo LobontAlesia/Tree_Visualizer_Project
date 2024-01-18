@@ -45,10 +45,10 @@
     -fx-text-fill: #5d866a;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-alignment: left;
+    -fx-alignment: CENTER_LEFT;
 }
 
 .viewnodeslabel{
     -fx-text-fill: black;
-    -fx-alignment: left;
+    -fx-alignment: CENTER_LEFT;
 }
